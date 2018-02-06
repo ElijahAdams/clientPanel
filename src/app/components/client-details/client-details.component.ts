@@ -3,6 +3,7 @@ import { ClientService } from '../../services/client.service';
 import { Client } from '../../Models/Client';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import {timeout} from "rxjs/operators/timeout";
 
 @Component({
   selector: 'app-client-details',
@@ -34,11 +35,26 @@ export class ClientDetailsComponent implements OnInit {
       }
 
       this.client = client;
-    })
+    });
+  }
+
+  updateBalance() {
+    this.clientService.updateClient(this.client);
+    this.fms.show('Balance updated',
+      { cssClass : 'alert-success', timeout:4000
+    });
   }
 
   onDeleteClick() {
-
+    if(confirm('Are you sure?')){
+      this.clientService.deleteClient(this.client);
+      this.fms.show('client removed',
+        { cssClass : 'alert-info', timeout:4000
+        });
+    }
+    this.router.navigate(['/']);
   }
+
+
 
 }

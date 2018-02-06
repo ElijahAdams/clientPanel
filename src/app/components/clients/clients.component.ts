@@ -19,10 +19,10 @@ export class ClientsComponent implements OnInit {
       this.getTotalBalance();
     })
   }
- getTotalBalance() {
+  getTotalBalance() {
     this.totalBalance = this.clients.reduce((total, client) => {
-      return total + client.balance;
-    }, 0)
+      return total + parseFloat(client.balance.toString());
+    }, 0);
+  }
 
- }
 }

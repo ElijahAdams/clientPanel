@@ -1,12 +1,12 @@
 <div class="flex-lg-row">
-  <div class="col-md-6">
+  <div class="cold-md-6">
     <h5><i class="fa fa-users"></i> Clients </h5>
   </div>
-  <div class="col-md-6" >
+  <div class="cold-md-6" >
     <h5 class="text-right text-secondary"> Total Balance: {{totalBalance | currency:"USD":"symbol"}}</h5>
   </div>
 </div>
-<table *ngIf="clients?.length > 0; else noClients" class="table table-striped">
+<table *ngIf="clients?.length > 0;else noClients" class=" table table-striped">
   <thead class="thead-inverse">
   <tr>
     <th>Name</th>
