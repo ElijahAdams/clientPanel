@@ -21,4 +21,8 @@ export class AuthService {
   getAuth() {
     return this.afa.authState.map(auth => auth);
   }
+
+  logout() {
+    this.afa.auth.signOut();
+  }
 }
