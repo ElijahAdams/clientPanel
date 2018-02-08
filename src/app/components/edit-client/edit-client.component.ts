@@ -4,7 +4,7 @@ import { Client } from '../../Models/Client';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import {timeout} from "rxjs/operators/timeout";
-
+import { SettingsService } from '../../services/settings.service';
 
 @Component({
   selector: 'app-edit-client',
@@ -21,13 +21,13 @@ export class EditClientComponent implements OnInit {
     balance: 0
   }
 
-  disableBalanceOnEdit : boolean = true;
-
+  disableBalanceOnEdit : boolean;
 
   constructor(private clientService : ClientService,
               private fms : FlashMessagesService,
               private router :  Router,
-              private route : ActivatedRoute) { }
+              private route : ActivatedRoute,
+              private settingsService : SettingsService) { }
 
   ngOnInit() {
     //get id from url
@@ -36,6 +36,8 @@ export class EditClientComponent implements OnInit {
     this.clientService.getClient(this.id).subscribe(client => {
       this.client = client;
     })
+
+    this.disableBalanceOnEdit = this.settingsService.getSettings().disableBalanceOnEdit;
   }
 
   onSubmit({value, valid} : {value: Client, valid: boolean}) {
